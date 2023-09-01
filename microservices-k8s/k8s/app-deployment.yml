@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-pod
+  template:
+    metadata:
+      labels:
+        app: app-pod
+    spec:
+      containers:
+      - name: flask-app
+        image: manangoradiya/flask-microservice
+        ports:
+        - containerPort: 5000
+        env:
+         - name: mongo
+           value: 10.107.241.241
+        imagePullPolicy: Always 
+
